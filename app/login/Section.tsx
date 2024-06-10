@@ -1,16 +1,23 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import logo from "../../public/logo.webp";
+import Image from 'next/image';
 
 const Section = () => {
     const navigation = useRouter()
 
     return (
-        <div className='card bg-white overflow-hidden lg:w-[60%] w-full shadow-lg'>
-            <div className="grid grid-cols-2 ">
+        <div className='card bg-white overflow-hidden lg:w-[70%] w-full shadow-lg'>
+            <div className="grid lg:grid-cols-2 ">
                 <div className="min-h-[40vh]">
                     <div className="card-body">
-                        <div className="text-4xl text-white drop-shadow-lg text-center uppercase font-bold">Jurusan Ku</div>
+                        <div className="flex gap-5 items-center">
+                            <div className="p-2 rounded-full shadow-md ">
+                                <Image alt='logo' src={logo} className='h-14 w-fit' />
+                            </div>
+                            <div className="text-4xl text-white drop-shadow-lg uppercase font-bold">Jurusan Ku</div>
+                        </div>
                         <div className="text-gray-900 uppercase font-bold text-2xl mt-5">SIGN IN</div>
                         <div className="flex flex-col gap-3">
                             <div className="form-control">
@@ -33,10 +40,11 @@ const Section = () => {
                                 </div>
                                 <button onClick={() => navigation.push('/sign-up')} className="btn btn-warning btn-sm">SIGN UP</button>
                             </div>
+                            <div className="text-xs font-thin text-center"><span className='text-lime-600'>* </span>Jika lupa password hubungi admin</div>
                         </div>
                     </div>
                 </div>
-                <div className="bg-tron"></div>
+                <div className="bg-tron lg:block hidden"></div>
             </div>
         </div>
     )
