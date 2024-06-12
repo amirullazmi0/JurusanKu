@@ -13,7 +13,7 @@ export default function Home() {
             <Image alt="" src={bengkayang} className="h-full w-fit" />
           </div> */}
         </div>
-        <div className="drop-shadow-md">YUK CARI TAU JURUSAN MU</div>
+        <div className="drop-shadow-md lg:text-8xl text-4xl ">YUK CARI TAU JURUSAN MU</div>
         <button onClickCapture={() => navigation.push('/login')} className="btn btn-primary uppercase font-bold text-white">
           Sign In
         </button>

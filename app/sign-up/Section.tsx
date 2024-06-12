@@ -14,6 +14,7 @@ const Section = () => {
     const [errorPassword, setErrorPassword] = useState<boolean | undefined>(undefined)
     const [errorPasswordRequire, setErrorPasswordRequier] = useState<boolean | undefined>(undefined)
     const [notifSuccess, setNotifSuccess] = useState<boolean>(false)
+    const [notifError, setNotifError] = useState<boolean>(false)
 
     const API_URL = process.env.API_URL
 
@@ -30,6 +31,7 @@ const Section = () => {
         register,
         handleSubmit,
         watch,
+        reset,
         setValue,
         formState: { errors },
     } = useForm<Inputs>({
@@ -38,19 +40,32 @@ const Section = () => {
         },
     })
 
+
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
+            if (data.password) {
+                const response = await axios.post(`${API_URL}/auth/register`, data)
+                console.log(data);
 
-            setNotifSuccess(true)
-            setTimeout(() => {
-                navigation.push('/login')
-                // setNotifSuccess(false)
-            }, 2000);
-            // const response = await axios.post(``, data)
+                console.log(response.data);
 
-            // if (response.data.data) {
-
-            // }
+                if (response.data.status == true) {
+                    setNotifSuccess(true)
+                    setTimeout(() => {
+                        navigation.push('/login')
+                        reset()
+                    }, 2000);
+                } else {
+                    setNotifError(true)
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    })
+                    setTimeout(() => {
+                        setNotifError(false)
+                    }, 2000);
+                }
+            }
         } catch (error) {
 
         }
@@ -60,8 +75,6 @@ const Section = () => {
         const stringPassword = e
         setConfirmPassword(stringPassword)
         setErrorPassword(false)
-
-        console.log(e);
 
         if (stringPassword === password) {
             setValue('password', stringPassword)
@@ -78,13 +91,16 @@ const Section = () => {
                 <div className="grid ">
                     <div className="min-h-[40vh]">
                         <div className="card-body">
-                            <div className="flex gap-5 items-center">
+                            <div className="flex gap-5 items-center mb-5">
                                 <div className="p-2 rounded-full shadow-md ">
                                     <Image alt='logo' src={logo} className='h-14 w-fit' />
                                 </div>
                                 <div className="text-4xl text-white drop-shadow-lg uppercase font-bold">Jurusan Ku</div>
                             </div>
-                            <div className="text-gray-900 uppercase font-bold text-2xl mt-5">SIGN UP</div>
+                            {notifError &&
+                                <div className="p-1 rounded bg-red-600 text-white capitalize mb-1 text-xs w-fit">Akun dengan email, nama pengguna atau noHP sudah terdaftar sebelumnya</div>
+                            }
+                            <div className="text-gray-900 uppercase font-bold text-2xl">SIGN UP</div>
                             <div className="grid lg:grid-cols-2 gap-3">
                                 <div className="form-control">
                                     <div>Nama Lengkap</div>
@@ -106,11 +122,19 @@ const Section = () => {
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 opacity-70">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                         </svg>
-                                        <input {...register('username', { required: true })} type="text" className="grow" placeholder="Nama pengguna" />
+                                        <input
+                                            {...register('username', {
+                                                required: 'Nama pengguna harus di isi',
+                                                pattern: {
+                                                    value: /^[A-Za-z0-9]+$/,
+                                                    message: 'Nama pengguna hanya bisa menggunakan huruf dan angka'
+                                                }
+                                            })}
+                                            type="text" className="grow" placeholder="Nama pengguna" />
                                     </label>
                                     {errors.username &&
                                         <div className="mt-2 text-end p-1 rounded-sm bg-red-600 text-white text-xs w-fit">
-                                            Nama pengguna harus di isi
+                                            {errors.username.message}
                                         </div>
                                     }
                                 </div>

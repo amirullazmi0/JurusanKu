@@ -1,10 +1,10 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import logo from "../../public/logo.webp";
+import logo from "../../../public/logo.webp";
 import Image from 'next/image';
 import axios from 'axios';
-import { alertSuccess } from '../Component/Alert';
+import { alertSuccess } from '../../Component/Alert';
 import Cookies from 'js-cookie'
 
 const Section = () => {
@@ -33,7 +33,7 @@ const Section = () => {
                     setEmail('')
                     setPassword('')
                     setTimeout(() => {
-                        navigation.push('/student')
+                        navigation.push('/admin')
                     }, 2000);
                 }
             }
@@ -55,7 +55,7 @@ const Section = () => {
                                 </div>
                                 <div className="text-4xl text-white drop-shadow-lg uppercase font-bold">Jurusan Ku</div>
                             </div>
-                            <div className="text-gray-900 uppercase font-bold text-2xl mt-5">SIGN IN</div>
+                            <div className="text-gray-900 uppercase font-bold text-2xl mt-5">SIGN IN ADMIN</div>
                             <div className="flex flex-col gap-3">
                                 <div className="form-control">
                                     <div className="">Email</div>
@@ -72,14 +72,7 @@ const Section = () => {
                                     </label>
                                 </div>
                                 <button onClick={handleLogin} className='btn btn-primary uppercase text-white'>Login</button>
-                                <hr />
-                                <div className="flex gap-2 justify-center text-center items-center">
-                                    <div className="">
-                                        Belum punya akun ?
-                                    </div>
-                                    <button onClick={() => navigation.push('/sign-up')} className="btn btn-warning btn-sm">SIGN UP</button>
-                                </div>
-                                <div className="text-xs font-thin text-center"><span className='text-lime-600'>* </span>Jika lupa password hubungi admin</div>
+
                             </div>
                         </div>
                     </div>

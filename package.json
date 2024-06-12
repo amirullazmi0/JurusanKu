@@ -10,6 +10,8 @@
     "sass": "sass --watch app/globals.scss:app/globals.css"
   },
   "dependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "js-cookie": "^3.0.5",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
     "next": "14.2.3",
