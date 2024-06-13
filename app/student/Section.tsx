@@ -1,6 +1,8 @@
-import React from "react";
+'use client'
+import React, { useState } from "react";
 
 const Section = () => {
+
     return (
         <React.Fragment>
             <div className="lg:p-10 p-4 lg:w-[60%]">

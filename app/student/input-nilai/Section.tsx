@@ -4,11 +4,14 @@ import FormNilaiIPA from "./FormNilaiIPA";
 import FormNilaiIPS from "./FormNilaiIPS";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { biodataDTO } from "@/model/siswa.model";
 const Section = () => {
     const [tab, setTab] = useState<string>('')
     const [renderAlert, setRenderAlert] = useState<boolean>(false)
+    const [biodata, setBiodata] = useState<boolean | undefined>(undefined)
     const API_URL = process.env.API_URL
     const access_token = Cookies.get('access_token')
+
     const getNilai = async () => {
         try {
             const response = await axios.get(`${API_URL}/siswa/nilai`, {
@@ -22,6 +25,24 @@ const Section = () => {
                 console.log(response.data.data.kategori);
             } else if (response.data.data == null) {
                 setTab('null')
+            }
+        } catch (error) {
+
+        }
+    }
+
+    const getBiodata = async () => {
+        try {
+            const response = await axios.get(`${API_URL}/siswa/biodata`, {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            })
+
+            if (response.data.data.biodata) {
+                setBiodata(true)
+            } else {
+                setBiodata(false)
             }
         } catch (error) {
 
@@ -54,6 +75,7 @@ const Section = () => {
             if (response.data.data) {
                 setTab(e)
                 getNilai()
+                getBiodata()
             }
         } catch (error) {
 
@@ -84,27 +106,36 @@ const Section = () => {
 
     useEffect(() => {
         getNilai()
+        getBiodata()
     }, [])
 
     return (
         <React.Fragment>
             {renderAlert && renderAlertPilihJurusan(choseJurusan)}
             <div className="lg:p-10 p-4 lg:w-[60%]">
-                {tab == 'null' ?
-                    <>
-                        <div className="card shadow bg-white">
-                            <div className="card-body">
-                                <div className="font-bold">PILIH JURUSAN</div>
-                                <div className="flex gap-2 mt-4 justify-center">
-                                    <button onClick={() => handleJurusan('IPA')} className="btn btn-primary text-white uppercase ">IPA</button>
-                                    <button onClick={() => handleJurusan('IPS')} className="btn btn-secondary text-white uppercase">IPS</button>
+                {biodata == true ?
+                    tab == 'null' ?
+                        <>
+                            <div className="card shadow bg-white">
+                                <div className="card-body">
+                                    <div className="font-bold">PILIH JURUSAN</div>
+                                    <div className="flex gap-2 mt-4 justify-center">
+                                        <button onClick={() => handleJurusan('IPA')} className="btn btn-primary text-white uppercase ">IPA</button>
+                                        <button onClick={() => handleJurusan('IPS')} className="btn btn-secondary text-white uppercase">IPS</button>
+                                    </div>
                                 </div>
                             </div>
+                        </>
+                        : tab == 'IPA' ? <FormNilaiIPA /> : tab == 'IPS' && <FormNilaiIPS />
+                    : biodata == false &&
+                    <React.Fragment>
+                        <div className="card shadow bg-white">
+                            <div className="card-body">
+                                <div className="font-bold uppercase text-error">Lengkapi data profile terlebih dahulu</div>
+                            </div>
                         </div>
-                    </>
-                    : tab == 'IPA' ? <FormNilaiIPA /> : tab == 'IPS' && <FormNilaiIPS />
+                    </React.Fragment>
                 }
-
             </div>
         </React.Fragment >
     )

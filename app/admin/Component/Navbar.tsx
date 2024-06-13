@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../../../public/logo.webp";
 import Cookies from 'js-cookie'
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 interface props {
     active: string
 }
@@ -18,6 +19,7 @@ const Navbar: React.FC<props> = ({ active }) => {
         navigation.push('/login/admin')
     }
 
+    
 
     useEffect(() => {
         const session = Cookies.get('authName')
@@ -26,7 +28,7 @@ const Navbar: React.FC<props> = ({ active }) => {
 
     return (
         <React.Fragment >
-            <div className="navbar bg-white shadow-lg">
+            <div className="navbar bg-white shadow-lg sticky top-0 z-30">
                 <div className="flex-none">
                     <div className="drawer">
                         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
