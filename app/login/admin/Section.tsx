@@ -1,11 +1,12 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import logo from "../../../public/logo.webp";
 import Image from 'next/image';
 import axios from 'axios';
 import { alertSuccess } from '../../Component/Alert';
 import Cookies from 'js-cookie'
+import { LoginContext } from '../Component/LoginContext';
 
 const Section = () => {
     const navigation = useRouter()
@@ -13,7 +14,7 @@ const Section = () => {
     const [notifError, setNotifError] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-
+    const checkLogin = useContext(LoginContext)
     const API_URL = process.env.API_URL
 
     const handleLogin = async () => {
@@ -58,6 +59,10 @@ const Section = () => {
             }, 3000);
         }
     }
+
+    useEffect(() => {
+        checkLogin.checkLoginAdmin()
+    }, [])
 
     return (
         <React.Fragment>

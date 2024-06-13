@@ -45,9 +45,9 @@ const Section = () => {
         try {
             if (data.password) {
                 const response = await axios.post(`${API_URL}/auth/register`, data)
-                console.log(data);
+                //console.log(data);
 
-                console.log(response.data);
+                //console.log(response.data);
 
                 if (response.data.status == true) {
                     setNotifSuccess(true)

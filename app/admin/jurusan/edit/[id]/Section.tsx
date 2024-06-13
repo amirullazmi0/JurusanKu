@@ -49,7 +49,7 @@ const Section: React.FC<props> = ({ id }) => {
                 }
             })
 
-            console.log(response.data);
+            //console.log(response.data);
 
 
             if (response.data.data) {

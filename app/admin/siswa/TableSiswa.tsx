@@ -8,7 +8,7 @@ import { siswaAdminDTO } from "@/model/siswa.model";
 
 const TableSiswa = () => {
     const [siswa, setsiswa] = useState<siswaAdminDTO[]>([])
-    
+
     const API_URL = process.env.API_URL
     const access_token = Cookies.get('access_token')
     const navigation = useRouter()
@@ -52,7 +52,7 @@ const TableSiswa = () => {
                     }, 3000);
                 }
             } catch (error) {
-                console.error('Error deleting data', error);
+                //console.error('Error deleting data', error);
             }
         }
     }

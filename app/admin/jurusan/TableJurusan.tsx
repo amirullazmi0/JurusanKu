@@ -50,7 +50,7 @@ const TableJurusan = () => {
                     }, 3000);
                 }
             } catch (error) {
-                console.error('Error deleting data', error);
+                //console.error('Error deleting data', error);
             }
         }
     }

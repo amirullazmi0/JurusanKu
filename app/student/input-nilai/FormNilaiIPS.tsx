@@ -66,7 +66,7 @@ const FormNilaiIPS = () => {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
-            console.log(access_token);
+            //console.log(access_token);
 
             const response = await axios.post(`${API_URL}/siswa/nilai`, data
                 , {
@@ -75,7 +75,7 @@ const FormNilaiIPS = () => {
                     }
                 })
 
-            console.log(response.data);
+            //console.log(response.data);
 
             if (response.data.status == true) {
                 setNotifSuccess(true)
