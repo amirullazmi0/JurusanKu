@@ -5,7 +5,12 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Cookies from "js-cookie";
-const Section = () => {
+
+interface props {
+    id: string
+}
+
+const Section: React.FC<props> = ({ id }) => {
     const API_URL = process.env.API_URL
     const [notifSuccess, setNotifSuccess] = useState<boolean>(false)
     const [notifFailed, setNotifFailed] = useState<string | null>(null)

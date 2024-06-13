@@ -15,7 +15,7 @@ const Navbar: React.FC<props> = ({ active }) => {
         Cookies.remove('access_token')
         Cookies.remove('authName')
         Cookies.remove('level')
-        navigation.push('/login')
+        navigation.push('/login/admin')
     }
 
 

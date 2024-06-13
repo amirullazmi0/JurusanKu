@@ -1,6 +1,6 @@
 export class jurusanDTO {
     id?: number
-    nama_jurusan?: string
+    nama_juruasan?: string
     kategori?: string
     matematika?: number | null
     bahasa_indonesia?: number | null

@@ -1,7 +1,7 @@
 'use client'
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form"
 import Cookies from 'js-cookie'
 import { alertSuccess } from "@/app/Component/Alert";
@@ -40,6 +40,27 @@ const FormNilaiIPA = () => {
         },
     })
 
+    const getNilai = async () => {
+        try {
+            const response = await axios.get(`${API_URL}/siswa/nilai`, {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            })
+
+            if (response.data.data) {
+                const nilai = response.data.data
+                setValue('matematika', nilai.matematika)
+                setValue('bahasa_indonesia', nilai.bahasa_indonesia)
+                setValue('bahasa_inggris', nilai.bahasa_inggris)
+                setValue('fisika', nilai.fisika)
+                setValue('kimia', nilai.kimia)
+                setValue('biologi', nilai.biologi)
+            }
+        } catch (error) {
+
+        }
+    }
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
@@ -74,6 +95,10 @@ const FormNilaiIPA = () => {
 
         }
     }
+
+    useEffect(() => {
+        getNilai()
+    }, [])
 
     return (
         <React.Fragment>

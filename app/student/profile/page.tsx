@@ -5,7 +5,7 @@ import Navbar from "./../Component/Navbar";
 export default function Home() {
   return (
     <main className="flex flex-col">
-      <Navbar active="dashboard" />
+      <Navbar active="profile" />
       <Section />
     </main>
   );
