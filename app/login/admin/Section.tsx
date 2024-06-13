@@ -10,6 +10,7 @@ import Cookies from 'js-cookie'
 const Section = () => {
     const navigation = useRouter()
     const [notifSuccess, setNotifSuccess] = useState<boolean>(false)
+    const [notifError, setNotifError] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
@@ -24,21 +25,37 @@ const Section = () => {
                 })
 
                 if (response.data.status == true) {
-                    // console.log(response.data.data.user[0]);
-
-                    Cookies.set('access_token', response.data.data.access_token)
-                    Cookies.set('authName', response.data.data.user[0].fullname)
-                    Cookies.set('level', response.data.data.user[0].kd_access[0].lvid)
-                    setNotifSuccess(true)
-                    setEmail('')
-                    setPassword('')
-                    setTimeout(() => {
-                        navigation.push('/admin')
-                    }, 2000);
+                    if (response.data.data.user[0].kd_access[0].lvid == 1) {
+                        Cookies.set('access_token', response.data.data.access_token)
+                        Cookies.set('authName', response.data.data.user[0].fullname)
+                        Cookies.set('level', response.data.data.user[0].kd_access[0].lvid)
+                        setNotifSuccess(true)
+                        setEmail('')
+                        setPassword('')
+                        setTimeout(() => {
+                            navigation.push('/admin')
+                        }, 2000);
+                    } else {
+                        setNotifError('Akun Tidak Ditemukan')
+                        window.scroll({
+                            top: 0,
+                            behavior: 'smooth'
+                        })
+                        setTimeout(() => {
+                            setNotifError('')
+                        }, 3000);
+                    }
                 }
             }
         } catch (error) {
-
+            setNotifError('Akun Tidak Ditemukan')
+            window.scroll({
+                top: 0,
+                behavior: 'smooth'
+            })
+            setTimeout(() => {
+                setNotifError('')
+            }, 3000);
         }
     }
 
@@ -55,6 +72,11 @@ const Section = () => {
                                 </div>
                                 <div className="text-4xl text-white drop-shadow-lg uppercase font-bold">Jurusan Ku</div>
                             </div>
+                            {notifError &&
+                                <div role="alert" className="alert alert-warning mt-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                                    <span>{notifError}</span>
+                                </div>}
                             <div className="text-gray-900 uppercase font-bold text-2xl mt-5">SIGN IN ADMIN</div>
                             <div className="flex flex-col gap-3">
                                 <div className="form-control">

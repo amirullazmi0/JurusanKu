@@ -4,9 +4,13 @@ import Cookies from 'js-cookie'
 
 export function middleware(request: NextRequest) {
     let cookie = request.cookies.get('access_token')
-
+    let level: any = request.cookies.get('level')
     if (!cookie) {
-        return NextResponse.redirect(new URL("/login", request.url))
+        if (request.nextUrl.pathname.startsWith('/admin')) {
+            return NextResponse.redirect(new URL("/login/admin", request.url))
+        } else if ("/student") {
+            return NextResponse.redirect(new URL("/login", request.url))
+        }
     }
 }
 

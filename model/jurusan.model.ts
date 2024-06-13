@@ -15,3 +15,8 @@ export class jurusanDTO {
     createdAt?: string
     updatedAt?: string
 }
+
+export class rekomendasiDTO {
+    jurusan?: string
+    score?: number
+}
