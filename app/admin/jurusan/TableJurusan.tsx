@@ -83,7 +83,6 @@ const TableJurusan = () => {
                             <th>Geografi</th>
                             <th>Ekonomi</th>
                             <th>Sosiologi</th>
-                            <th>Sejarah</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -105,7 +104,6 @@ const TableJurusan = () => {
                                         <td>{item.geografi}</td>
                                         <td>{item.ekonomi}</td>
                                         <td>{item.sosiologi}</td>
-                                        <td>{item.sejarah}</td>
                                         <td>
                                             <div className="flex gap-2">
                                                 <button onClick={() => navigation.push(`/admin/jurusan/edit/${item.id}`)} className="btn btn-warning">

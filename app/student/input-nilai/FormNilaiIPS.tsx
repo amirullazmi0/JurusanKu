@@ -28,7 +28,6 @@ const FormNilaiIPS = () => {
                 setValue('bahasa_inggris', nilai.bahasa_inggris)
                 setValue('ekonomi', nilai.ekonomi)
                 setValue('geografi', nilai.geografi)
-                setValue('sejarah', nilai.sejarah)
                 setValue('sosiologi', nilai.sejarah)
             }
         } catch (error) {
@@ -47,7 +46,7 @@ const FormNilaiIPS = () => {
         geografi: number
         ekonomi: number
         sosiologi: number
-        sejarah: number
+        // sejarah: number
     }
 
     const {
@@ -144,13 +143,13 @@ const FormNilaiIPS = () => {
                         <div className="p-1 bg-error text-xs text-white rounded mt-2 w-fit">{errors.geografi.message}</div>
                     }
                 </div>
-                <div className="form-control">
+                {/* <div className="form-control">
                     <label htmlFor="">Sejarah</label>
                     <input type="number" min={0} max={100}  {...register('sejarah', { required: 'Nilai sejarah harus di isi' })} placeholder="Masukan Nilai" className="input input-bordered w-full" />
                     {errors.sejarah &&
                         <div className="p-1 bg-error text-xs text-white rounded mt-2 w-fit">{errors.sejarah.message}</div>
                     }
-                </div>
+                </div> */}
                 <div className="form-control">
                     <label htmlFor="">Ekonomi</label>
                     <input type="number" min={0} max={100}  {...register('ekonomi', { required: 'Nilai ekonomi harus di isi' })} placeholder="Masukan Nilai" className="input input-bordered w-full" />

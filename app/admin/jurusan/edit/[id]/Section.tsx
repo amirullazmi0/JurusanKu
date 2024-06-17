@@ -29,7 +29,6 @@ const Section: React.FC<props> = ({ id }) => {
         geografi?: number | null
         ekonomi?: number | null
         sosiologi?: number | null
-        sejarah?: number | null
     }
 
     const {
@@ -111,34 +110,39 @@ const Section: React.FC<props> = ({ id }) => {
                                 <label className="capitalize" htmlFor="">bahasa inggris</label>
                                 <input  {...register("bahasa_inggris")} type="number" min={0} max={100} placeholder="nilai bahasa inggris" className="input input-bordered w-full" />
                             </div>
-                            <div className="form-control">
-                                <label className="capitalize" htmlFor="">fisika</label>
-                                <input  {...register("fisika")} type="number" min={0} max={100} placeholder="nilai fisika" className="input input-bordered w-full" />
-                            </div>
-                            <div className="form-control">
-                                <label className="capitalize" htmlFor="">kimia</label>
-                                <input  {...register("kimia")} type="number" min={0} max={100} placeholder="nilai kimia" className="input input-bordered w-full" />
-                            </div>
-                            <div className="form-control">
-                                <label className="capitalize" htmlFor="">biologi</label>
-                                <input  {...register("biologi")} type="number" min={0} max={100} placeholder="nilai biologi" className="input input-bordered w-full" />
-                            </div>
-                            <div className="form-control">
-                                <label className="capitalize" htmlFor="">geografi</label>
-                                <input {...register("geografi")} type="number" min={0} max={100} placeholder="nilai geografi" className="input input-bordered w-full" />
-                            </div>
-                            <div className="form-control">
-                                <label className="capitalize" htmlFor="">sosiologi</label>
-                                <input {...register("sosiologi")} type="number" min={0} max={100} placeholder="nilai sosiologi" className="input input-bordered w-full" />
-                            </div>
-                            <div className="form-control">
-                                <label className="capitalize" htmlFor="">ekonomi</label>
-                                <input {...register("ekonomi")} type="number" min={0} max={100} placeholder="nilai ekonomi" className="input input-bordered w-full" />
-                            </div>
-                            <div className="form-control">
-                                <label className="capitalize" htmlFor="">sejarah</label>
-                                <input {...register("sejarah")} type="number" min={0} max={100} placeholder="nilai sejarah" className="input input-bordered w-full" />
-                            </div>
+                            {watch('kategori') == 'IPA' &&
+                                <React.Fragment>
+                                    <div className="form-control">
+                                        <label className="capitalize" htmlFor="">fisika</label>
+                                        <input  {...register("fisika")} type="number" min={0} max={100} placeholder="nilai fisika" className="input input-bordered w-full" />
+                                    </div>
+                                    <div className="form-control">
+                                        <label className="capitalize" htmlFor="">kimia</label>
+                                        <input  {...register("kimia")} type="number" min={0} max={100} placeholder="nilai kimia" className="input input-bordered w-full" />
+                                    </div>
+                                    <div className="form-control">
+                                        <label className="capitalize" htmlFor="">biologi</label>
+                                        <input  {...register("biologi")} type="number" min={0} max={100} placeholder="nilai biologi" className="input input-bordered w-full" />
+                                    </div>
+                                </React.Fragment>
+                            }
+                            {watch('kategori') == 'IPS' &&
+                                <React.Fragment>
+
+                                    <div className="form-control">
+                                        <label className="capitalize" htmlFor="">geografi</label>
+                                        <input {...register("geografi")} type="number" min={0} max={100} placeholder="nilai geografi" className="input input-bordered w-full" />
+                                    </div>
+                                    <div className="form-control">
+                                        <label className="capitalize" htmlFor="">sosiologi</label>
+                                        <input {...register("sosiologi")} type="number" min={0} max={100} placeholder="nilai sosiologi" className="input input-bordered w-full" />
+                                    </div>
+                                    <div className="form-control">
+                                        <label className="capitalize" htmlFor="">ekonomi</label>
+                                        <input {...register("ekonomi")} type="number" min={0} max={100} placeholder="nilai ekonomi" className="input input-bordered w-full" />
+                                    </div>
+                                </React.Fragment>
+                            }
                             <div className="lg:col-span-3">
                                 <button onClick={handleSubmit(onSubmit)} className="btn btn-primary uppercase text-white w-full">
                                     tambah

@@ -10,13 +10,18 @@ export class siswaDTO {
 export class biodataDTO {
     id?: number
     gid?: string
-    alamat?: string
-    ttl?: string
-    jenis_kelamin?: string
     agama?: string
+    alamat?: string
     asal_sekolah?: string
-    nilai_rata_rata?: number
+    email?: string
+    jenis_kelamin?: string
+    nilai_rata_rata?: string
+    nohp?: number
+    pic?: string
     rekomendasi_jurusan?: any
+    ttl?: string
+    username?: string
+    fullname?: string
 }
 
 export class siswaAdminDTO {

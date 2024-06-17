@@ -21,6 +21,8 @@ const Section = () => {
             })
 
             if (response.data.data) {
+                console.log(response.data.data);
+
                 setTab(response.data.data.kategori)
                 //console.log(response.data.data.kategori);
             } else if (response.data.data == null) {
@@ -39,7 +41,7 @@ const Section = () => {
                 }
             })
 
-            if (response.data.data.biodata) {
+            if (response.data.data.agama) {
                 setBiodata(true)
             } else {
                 setBiodata(false)
@@ -51,7 +53,6 @@ const Section = () => {
 
     const updateJurusan = async (e: string) => {
         setRenderAlert(false)
-        //console.log(e);
 
         try {
             const response = await axios.post(`${API_URL}/siswa/nilai`, {

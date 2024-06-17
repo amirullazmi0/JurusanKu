@@ -1,13 +1,13 @@
 'use client'
-import CheckAuth from "@/app/Component/CheckAuth";
 import AuthAdminProvider from "../../Component/AdminContext";
+import CheckAuthAdmin from "../../Component/CheckAuthAdmin";
 import Navbar from "./../../Component/Navbar";
 import Section from "./Section";
 
 export default function Home() {
     return (
         <AuthAdminProvider>
-            <CheckAuth />
+            <CheckAuthAdmin />
             <main className="flex flex-col">
                 <Navbar active="jurusan" />
                 <Section />

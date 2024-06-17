@@ -18,12 +18,11 @@ export default function AuthAdminProvider({ children }: { children: React.ReactN
     const navigation = useRouter()
     const checkAuth = async () => {
         try {
-            const response = await axios.get(`${API_URL}/admin/rekomendasi`, {
+            const response = await axios.get(`http://localhost:4444/api/admin/rekomendasi`, {
                 headers: {
                     Authorization: `Bearer ${access_token}`
                 }
             })
-
 
             if (response.data.status == false) {
                 Cookies.remove('access_token')

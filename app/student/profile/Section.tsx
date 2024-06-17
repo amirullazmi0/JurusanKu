@@ -13,6 +13,11 @@ const Section = () => {
     const [notifSuccess, setNotifSuccess] = useState<boolean>(false)
     const navigation = useRouter()
 
+    const [fullname, setfullname] = useState<string | undefined>()
+    const [email, setemail] = useState<string | undefined>()
+    const [noHp, setnoHp] = useState<number | undefined>()
+    const [username, setUsername] = useState<string | undefined>()
+
     type Inputs = {
         alamat: string
         ttl: string
@@ -64,17 +69,17 @@ const Section = () => {
             })
 
             if (response.data.data) {
-                if (response.data.data.user) {
-                    const biodata: biodataDTO = response.data.data.biodata
-                    setDataSiswa(response.data.data.user)
-                    setValue('agama', biodata.agama ? biodata.agama : '')
-                    setValue('alamat', biodata.alamat ? biodata.alamat : '')
-                    setValue('asal_sekolah', biodata.asal_sekolah ? biodata.asal_sekolah : '')
-                    setValue('jenis_kelamin', biodata.jenis_kelamin ? biodata.jenis_kelamin : '')
-                    setValue('ttl', biodata.ttl ? biodata.ttl : '')
-                } else {
-                    setDataSiswa(response.data.data)
-                }
+                console.log(response.data.data);
+                const biodata: biodataDTO = response.data.data
+                setUsername(biodata.username)
+                setemail(biodata.email)
+                setfullname(biodata.fullname)
+                setnoHp(biodata.nohp)
+                setValue('agama', biodata.agama ? biodata.agama : '')
+                setValue('alamat', biodata.alamat ? biodata.alamat : '')
+                setValue('asal_sekolah', biodata.asal_sekolah ? biodata.asal_sekolah : '')
+                setValue('jenis_kelamin', biodata.jenis_kelamin ? biodata.jenis_kelamin : '')
+                setValue('ttl', biodata.ttl ? biodata.ttl : '')
             }
         } catch (error) {
 
@@ -92,29 +97,29 @@ const Section = () => {
                         {notifSuccess &&
                             <div role="alert" className="alert alert-success text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span>Your purchase has been confirmed!</span>
+                                <span>Data berhasil diupdate</span>
                             </div>
                         }
                         <div className="font-bold">BIODATA</div>
                         <div className="flex">
                             <div className="w-32">Nama Lengkap</div>
                             <div className="pr-2">:</div>
-                            <div className="">{dataSiswa?.fullname}</div>
+                            <div className="">{fullname}</div>
                         </div>
                         <div className="flex">
                             <div className="w-32">Nama Pengguna</div>
                             <div className="pr-2">:</div>
-                            <div className="">{dataSiswa?.username}</div>
+                            <div className="">{username}</div>
                         </div>
                         <div className="flex">
                             <div className="w-32">Nomor HP</div>
                             <div className="pr-2">:</div>
-                            <div className="">62 {dataSiswa?.nohp}</div>
+                            <div className="">62 {noHp}</div>
                         </div>
                         <div className="flex">
                             <div className="w-32">Email</div>
                             <div className="pr-2">:</div>
-                            <div className="">{dataSiswa?.email}</div>
+                            <div className="">{email}</div>
                         </div>
                         <hr className="m-3" />
                         <div className="grid lg:grid-cols-2 gap-2">

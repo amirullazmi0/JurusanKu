@@ -19,7 +19,7 @@ const Navbar: React.FC<props> = ({ active }) => {
         navigation.push('/login/admin')
     }
 
-    
+
 
     useEffect(() => {
         const session = Cookies.get('authName')

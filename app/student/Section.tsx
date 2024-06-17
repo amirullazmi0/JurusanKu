@@ -16,6 +16,9 @@ const Section = () => {
             })
 
             if (response.data.status == true) {
+
+                console.log(response.data);
+                
                 setRekomendasi(response.data.data)
             }
         } catch (error) {
@@ -40,7 +43,7 @@ const Section = () => {
                                         <div className="card bg-white shadow-lg">
                                             <div className="card-body text-center">
                                                 <div className="">{item.jurusan}</div>
-                                                <div className="text-4xl font-bold">{score?.toFixed(2)}</div>
+                                                <div className="text-4xl font-bold">{score}</div>
                                             </div>
                                         </div>
                                     </React.Fragment>
