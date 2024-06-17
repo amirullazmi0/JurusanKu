@@ -2,9 +2,10 @@
 import { alertSuccess } from "@/app/Component/Alert";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Cookies from "js-cookie";
+import { jurusanDTO } from "@/model/jurusan.model";
 
 interface props {
     id: string
@@ -40,9 +41,36 @@ const Section: React.FC<props> = ({ id }) => {
         formState: { errors },
     } = useForm<Inputs>({})
 
+    const getData = async () => {
+        try {
+            const response = await axios.get(`${API_URL}/admin/rekomendasi/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            })
+
+            if (response.data.data) {
+                const data: jurusanDTO = response.data.data
+                setValue('nama_juruasan', data.nama_juruasan)
+                setValue('kategori', data.kategori)
+                setValue('matematika', data.matematika)
+                setValue('bahasa_indonesia', data.bahasa_indonesia)
+                setValue('bahasa_inggris', data.bahasa_inggris)
+                setValue('fisika', data.fisika)
+                setValue('kimia', data.kimia)
+                setValue('biologi', data.biologi)
+                setValue('ekonomi', data.ekonomi)
+                setValue('geografi', data.geografi)
+                setValue('sosiologi', data.sosiologi)
+            }
+        } catch (error) {
+
+        }
+    }
+
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
-            const response = await axios.post(`${API_URL}/admin/rekomendasi`, data, {
+            const response = await axios.put(`${API_URL}/admin/rekomendasi/${id}`, data, {
                 headers: {
                     Authorization: `Bearer ${access_token}`
                 }
@@ -72,9 +100,13 @@ const Section: React.FC<props> = ({ id }) => {
         }
     }
 
+    useEffect(() => {
+        getData()
+    }, [])
+
     return (
         <React.Fragment>
-            {notifSuccess && alertSuccess({ title: 'Tambah Jurusan Successfully', text: "Direct to jurusan" })}
+            {notifSuccess && alertSuccess({ title: 'Update Jurusan Successfully', text: "Direct to jurusan" })}
             <div className="lg:p-10 p-4">
                 <div className="card shadow-lg bg-white lg:w-[60%]">
                     <div className="card-body">
@@ -145,7 +177,7 @@ const Section: React.FC<props> = ({ id }) => {
                             }
                             <div className="lg:col-span-3">
                                 <button onClick={handleSubmit(onSubmit)} className="btn btn-primary uppercase text-white w-full">
-                                    tambah
+                                    Update
                                 </button>
                             </div>
                         </div>
