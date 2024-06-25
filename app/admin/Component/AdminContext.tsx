@@ -16,6 +16,7 @@ export default function AuthAdminProvider({ children }: { children: React.ReactN
     const API_URL = process.env.API_URL
     const access_token = Cookies.get('access_token')
     const navigation = useRouter()
+    // asd
     const checkAuth = async () => {
         try {
             const response = await axios.get(`http://localhost:4444/api/admin/rekomendasi`, {
