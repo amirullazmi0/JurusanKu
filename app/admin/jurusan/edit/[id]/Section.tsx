@@ -112,6 +112,9 @@ const Section: React.FC<props> = ({ id }) => {
                     <div className="card-body">
                         {notifFailed !== null && <div className="p-2 bg-error text-white rounded-lg">{notifFailed}</div>}
                         <div className="grid lg:grid-cols-3 gap-3">
+                            <div className="lg:col-span-3 uppercase font-bold text-xl">
+                                FORM EDIT JURUSAN
+                            </div>
                             <div className="form-control lg:col-span-2">
                                 <label htmlFor="">Nama Jurusan</label>
                                 <input {...register("nama_juruasan", { required: 'jurusan harus di isi' })} type="text" placeholder="masukan nama jurusan" className="input input-bordered w-full" />
