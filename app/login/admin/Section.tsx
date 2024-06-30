@@ -37,7 +37,7 @@ const Section = () => {
                             navigation.push('/admin')
                         }, 2000);
                     } else {
-                        setNotifError('Akun Tidak Ditemukan')
+                        setNotifError('Periksa Akun Anda')
                         window.scroll({
                             top: 0,
                             behavior: 'smooth'
@@ -49,7 +49,7 @@ const Section = () => {
                 }
             }
         } catch (error) {
-            setNotifError('Akun Tidak Ditemukan')
+            setNotifError('Periksa Akun Anda')
             window.scroll({
                 top: 0,
                 behavior: 'smooth'

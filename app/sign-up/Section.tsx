@@ -15,6 +15,7 @@ const Section = () => {
     const [errorPasswordRequire, setErrorPasswordRequier] = useState<boolean | undefined>(undefined)
     const [notifSuccess, setNotifSuccess] = useState<boolean>(false)
     const [notifError, setNotifError] = useState<boolean>(false)
+    const [notifErrorMessage, setNotifErrorMessage] = useState<any>()
 
     const API_URL = process.env.API_URL
 
@@ -45,10 +46,6 @@ const Section = () => {
         try {
             if (data.password) {
                 const response = await axios.post(`${API_URL}/auth/register`, data)
-                //console.log(data);
-
-                //console.log(response.data);
-
                 if (response.data.status == true) {
                     setNotifSuccess(true)
                     setTimeout(() => {
@@ -57,17 +54,29 @@ const Section = () => {
                     }, 2000);
                 } else {
                     setNotifError(true)
+                    setNotifErrorMessage('register failed')
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
                     })
                     setTimeout(() => {
                         setNotifError(false)
-                    }, 2000);
+                        setNotifErrorMessage(null)
+                    }, 5000);
                 }
             }
         } catch (error) {
-
+            const errors: any = error
+            setNotifError(true)
+            setNotifErrorMessage(errors.response.data.data)
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            })
+            setTimeout(() => {
+                setNotifError(false)
+                setNotifErrorMessage(null)
+            }, 5000);
         }
     }
 
@@ -98,7 +107,20 @@ const Section = () => {
                                 <div className="text-4xl text-white drop-shadow-lg uppercase font-bold">Jurusan Ku</div>
                             </div>
                             {notifError &&
-                                <div className="p-1 rounded bg-red-600 text-white capitalize mb-1 text-xs w-fit">Akun dengan email, nama pengguna atau noHP sudah terdaftar sebelumnya</div>
+                                <div role="alert" className="alert alert-warning">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-6 w-6 shrink-0 stroke-current"
+                                        fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                    </svg>
+                                    <span>{notifErrorMessage}</span>
+                                </div>
                             }
                             <div className="text-gray-900 uppercase font-bold text-2xl">SIGN UP</div>
                             <div className="grid lg:grid-cols-2 gap-3">

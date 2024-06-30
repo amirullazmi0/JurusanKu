@@ -53,7 +53,6 @@ const Section = () => {
 
     const updateJurusan = async (e: string) => {
         setRenderAlert(false)
-
         try {
             const response = await axios.post(`${API_URL}/siswa/nilai`, {
                 kategori: e,
@@ -73,7 +72,7 @@ const Section = () => {
                 }
             })
 
-            if (response.data.data) {
+            if (response.data) {
                 setTab(e)
                 getNilai()
                 getBiodata()
@@ -108,7 +107,7 @@ const Section = () => {
     useEffect(() => {
         getNilai()
         getBiodata()
-    }, [])
+    }, [tab])
 
     return (
         <React.Fragment>

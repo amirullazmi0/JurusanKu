@@ -19,8 +19,6 @@ const TableSiswa = () => {
                     Authorization: `Bearer ${access_token}`
                 }
             })
-            console.log(response.data);
-
 
             if (response.data.data) {
                 setsiswa(response.data.data)
@@ -42,8 +40,8 @@ const TableSiswa = () => {
                     }
                 });
 
-                if (response.data.status == true) {
-                    getSiswa()
+                if (response.data == true) {
+                    // getSiswa()
                     setDeleteSuccess(true)
                     window.scroll({
                         top: 0,
@@ -54,7 +52,7 @@ const TableSiswa = () => {
                     }, 3000);
                 }
             } catch (error) {
-                //console.error('Error deleting data', error);
+                console.error('Error deleting data', error);
             }
         }
     }
@@ -155,7 +153,7 @@ const TableSiswa = () => {
 
     useEffect(() => {
         getSiswa()
-    }, [])
+    }, [updatePasswordSuccess, deleteSuccess])
     return (
         <div className="">
             {deleteSuccess &&
