@@ -28,7 +28,7 @@ const FormNilaiIPS = () => {
                 setValue('bahasa_inggris', nilai.bahasa_inggris)
                 setValue('ekonomi', nilai.ekonomi)
                 setValue('geografi', nilai.geografi)
-                setValue('sosiologi', nilai.sejarah)
+                setValue('sosiologi', nilai.sosiologi)
             }
         } catch (error) {
 

@@ -15,6 +15,7 @@ const Section = () => {
                 }
             })
 
+
             if (response.data.status == true) {
 
                 console.log(response.data);
@@ -22,6 +23,7 @@ const Section = () => {
                 setRekomendasi(response.data.data)
             }
         } catch (error) {
+            console.log(error);
 
         }
     }
@@ -49,6 +51,7 @@ const Section = () => {
                                                 <div className="flex justify-center items-center">
                                                     <div className="text-center uppercase font-bold text-2xl p-2 bg-green-600 aspect-square rounded-full text-white w-12 flex justify-center items-center">{index + 1}</div>
                                                 </div>
+                                                <hr />
                                                 <div className="uppercase font-bold">{item.jurusan}</div>
                                                 {/* <div className="text-4xl font-bold">{score}</div> */}
                                             </div>

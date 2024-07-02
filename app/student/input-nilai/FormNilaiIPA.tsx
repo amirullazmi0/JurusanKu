@@ -24,7 +24,7 @@ const FormNilaiIPA = () => {
         geografi: null
         ekonomi: null
         sosiologi: null
-        sejarah: null
+        // sejarah: null
     }
 
     const {
